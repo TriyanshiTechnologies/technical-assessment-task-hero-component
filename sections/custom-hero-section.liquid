@@ -1,0 +1,138 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  rel="stylesheet"
+>
+
+{{ 'custom-hero-section.css' | asset_url | stylesheet_tag }}
+<script src="{{ "custom-hero-section.js" | asset_url }}" defer="defer"></script>
+
+<section class="tt-hero-section">
+  <div class="tt-hero-container">
+    <div class="tt-hero-content">
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.description }}</p>
+
+      <div class="tt-hero-cta">
+        <a href="{{ section.settings.button_link }}" class="tt-button-primary">
+          {{ section.settings.button_text }}
+        </a>
+        <span class="tt-meta-text">{{ section.settings.meta_text }}</span>
+      </div>
+    </div>
+
+    <div class="tt-hero-image">
+      {% if section.settings.hero_image %}
+        <img width="" height="" src="{{ section.settings.hero_image | image_url: width: 900 }}" loading="lazy">
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="tt-testimonial">
+    <div class="tt-divider"><span></span></div>
+
+    <div class="tt-testimonial-quote-wrap">
+      <!-- Left Arrow -->
+      <button class="tt-testimonial-nav tt-prev" aria-label="Previous Testimonial">
+        <img src="{{ "tt-sliderArrow.svg" | asset_url }}" width="30" height="30" alt="Slider Arrow">
+      </button>
+
+      <div class="tt-blockquote" id="tt-testimonial-text"></div>
+
+      <!-- Right Arrow -->
+      <button class="tt-testimonial-nav tt-next" aria-label="Next Testimonial">
+        <img src="{{ "tt-sliderArrow.svg" | asset_url }}" width="30" height="30" alt="Slider Arrow">
+      </button>
+    </div>
+
+    <div class="tt-testimonial-meta">
+      ★★★★★
+      <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 5.255V1.77641C7.04201 2.35992 5.93132 2.72257 4.7707 2.8308C4.9023 1.81111 5.32695 0.837217 6.00501 0H2.02991C2.6967 0.838344 3.11111 1.81032 3.23478 2.82599C2.06957 2.71081 0.956695 2.3392 0 1.74582V5.22447C0.95799 4.64096 2.06868 4.27832 3.2293 4.17009C3.09754 5.18947 2.6729 6.16304 1.99499 7H5.97009C5.30344 6.16189 4.88905 5.19022 4.76522 4.17483C5.93043 4.29001 7.04331 4.66162 8 5.255Z" fill="#9333EA"/>
+      </svg>
+      <span class="tt-testimonial-name">Lorem ipsum</span>
+      <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 5.255V1.77641C7.04201 2.35992 5.93132 2.72257 4.7707 2.8308C4.9023 1.81111 5.32695 0.837217 6.00501 0H2.02991C2.6967 0.838344 3.11111 1.81032 3.23478 2.82599C2.06957 2.71081 0.956695 2.3392 0 1.74582V5.22447C0.95799 4.64096 2.06868 4.27832 3.2293 4.17009C3.09754 5.18947 2.6729 6.16304 1.99499 7H5.97009C5.30344 6.16189 4.88905 5.19022 4.76522 4.17483C5.93043 4.29001 7.04331 4.66162 8 5.255Z" fill="#9333EA"/>
+      </svg>
+      <span class="tt-testimonial-date">22/09/1996</span>
+    </div>
+
+    <div class="tt-dots">
+      <span class="tt-dot tt-active" data-index="0"></span>
+      <span class="tt-dot" data-index="1"></span>
+      <span class="tt-dot" data-index="2"></span>
+      <span class="tt-dot" data-index="3"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --tt-gradient: linear-gradient(
+      90deg,
+      {{section.settings.gradient_start}} 0%,
+      {{section.settings.gradient_end}} 100%
+    );
+    --tt-bg-image: url('{{ "tt-background.png" | asset_url }}');
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "text",
+      "id": "meta_text",
+      "label": "Meta Text",
+      "default": "Over 100,000+ Happy customers"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "Gradient Start Color",
+      "default": "#9333EA"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "Gradient End Color",
+      "default": "#2563EB"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}
